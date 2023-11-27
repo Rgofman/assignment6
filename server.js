@@ -11,7 +11,11 @@ const passportJWT = require('passport-jwt');
 app.use(express.json());
 app.use(cors());
 app.use(passport.initialize());
-
+app. use(
+  cors({
+    origin : "*",
+  })
+)
 
 // JSON Web Token Setup
 let ExtractJwt = passportJWT.ExtractJwt;
