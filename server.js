@@ -43,6 +43,7 @@ let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
     next(null, {
         _id: jwt_payload._id,
         userName: jwt_payload.userName,
+        password: jwt_payload.password,
     });
   } else {
     next(null, false);
@@ -62,14 +63,7 @@ app.post("/api/user/register", (req, res) => {
 app.post("/api/user/login", (req, res) => {
     userService.checkUser(req.body)
     .then((user) => {
-
-        let payload = {
-            _id: user._id,
-            userName: user.userName,
-          };
-          let token = jwt.sign(payload, jwtOptions.secretOrKey);
-
-        res.json({ "message": "login successful"}, token);
+        res.json({ "message": "login successful"});
     }).catch(msg => {
         res.status(422).json({ "message": msg });
     });
