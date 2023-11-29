@@ -63,9 +63,9 @@ app.post("/api/user/register", (req, res) => {
 app.post("/api/user/login", (req, res) => {
 
 let payload = {
-  _id: user._id,
-  userName: user.userName,
-  password: user.password,
+  _id: req.body._id,
+  userName: req.body.userName,
+  password: req.body.password,
 };
 
 let token = jwt.sign(payload, jwtOptions.secretOrKey);
